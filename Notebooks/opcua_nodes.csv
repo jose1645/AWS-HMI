@@ -1,0 +1,3 @@
+Browse Name,Node ID,Display Name
+QualifiedName(0:Server),i=2253,Server
+QualifiedName(1:HMI_DataProvider),ns=1;s=/HMI_DataProvider,HMI_DataProvider
