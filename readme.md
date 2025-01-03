@@ -1,4 +1,5 @@
 # Proyecto: Conexión y Exploración de Nodos OPC UA
+![Logo del Proyecto](./logotipo.png)
 
 Este repositorio contiene un proyecto basado en Python que permite conectarse a un servidor OPC UA, explorar sus nodos y leer valores asociados. Es ideal para aplicaciones en automatización industrial, IoT y sistemas SCADA.
 
