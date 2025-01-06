@@ -1,0 +1,11 @@
+Node ID,Display Name,Value
+ns=1;s=/HMI_DataProvider/Adquision_datos_electricidad/Consumo_electrico,Consumo_electrico,1022.93603515625
+ns=1;s=/HMI_DataProvider/Adquision_datos_electricidad/VA,VA,136.79600524902344
+ns=1;s=/HMI_DataProvider/Adquision_datos_electricidad/VB,VB,135.2519989013672
+ns=1;s=/HMI_DataProvider/Adquision_datos_electricidad/VC,VC,139.57899475097656
+ns=1;s=/HMI_DataProvider/Adquision_datos_electricidad/VAB,VAB,235.0800018310547
+ns=1;s=/HMI_DataProvider/Adquision_datos_electricidad/VBC,VBC,239.1060028076172
+ns=1;s=/HMI_DataProvider/Adquision_datos_electricidad/VAC,VAC,238.8470001220703
+ns=1;s=/HMI_DataProvider/Adquision_datos_electricidad/CA,CA,1.3600000143051147
+ns=1;s=/HMI_DataProvider/Adquision_datos_electricidad/CB,CB,1.3600000143051147
+ns=1;s=/HMI_DataProvider/Adquision_datos_electricidad/CC,CC,0.0
