@@ -1,18 +1,25 @@
-# Proyecto: Conexión y Exploración de Nodos OPC UA
+# Proyecto: INTEGRACION HMI DOP100WS-AWS
 ![Logo del Proyecto](./logotipo.png)
 
-Este repositorio contiene un proyecto basado en Python que permite conectarse a un servidor OPC UA, explorar sus nodos y leer valores asociados. Es ideal para aplicaciones en automatización industrial, IoT y sistemas SCADA.
-
+Este repositorio contiene el codigo necesario para realizar la adquisicion de datos de un power meter instalado en planta y desplegar sus datos en una instancia EC2 de AWS.
 ## Características
 - Conexión a servidores OPC UA.
 - Exploración de nodos y estructura jerárquica.
 - Lectura de valores de nodos específicos.
 - Compatible con múltiples entornos industriales.
+- Script de ingesta de datos periodica.
+- despliegue en EC2 de AWS.
+- Codigo de dashboard desplegado en AWS
 
 ## Requisitos
 ### Software
 - Python 3.7 o superior.
 - Servidor OPC UA (puedes usar [FreeOpcUa](https://github.com/FreeOpcUa/freeopcua) para pruebas).
+- DopSoft actualizado
+### Hardware
+- HMI DOP100WS Marca delta 
+- Power meter DPM-C530
+- Pc
 
 ### Bibliotecas de Python
 Instala las dependencias ejecutando:
@@ -67,6 +74,8 @@ Nodo: ns=1;s=/HMI_DataProvider/Adquision_datos_electricidad/Consumo_electrico (C
 
 ## Contribuciones
 Las contribuciones son bienvenidas. Si encuentras un problema o tienes ideas para mejorar el proyecto, crea un **issue** o envía un **pull request**.
+## Video del proyecto
+https://www.youtube.com/watch?v=_Lhk4f6Xeuk&t=5s
 
 ## Licencia
 Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
