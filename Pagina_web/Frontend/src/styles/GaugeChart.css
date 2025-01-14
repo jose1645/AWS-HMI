@@ -1,0 +1,28 @@
+body {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.c-chart-gauge__needle-base, .c-chart-gauge__needle {
+  fill: #555555;
+}
+
+.c-chart-gauge__gradient-stop1 {
+  stop-color: red;
+}
+
+.c-chart-gauge__gradient-stop2 {
+  stop-color: green;
+}
+
+.c-chart-gauge__gradient-stop3 {
+  stop-color: green;
+}
+
+.c-chart-gauge__gradient-stop4 {
+  stop-color: red;
+}
+.c-chart-gauge {
+  background: none; /* Elimina cualquier fondo */
+  border: none; /* Asegúrate de que no haya bordes */
+}
