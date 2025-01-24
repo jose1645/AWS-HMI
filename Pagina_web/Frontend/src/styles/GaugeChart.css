@@ -1,9 +1,14 @@
+/* General styles */
 body {
   text-align: center;
   margin-top: 3rem;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa; /* Fondo ligero */
 }
 
-.c-chart-gauge__needle-base, .c-chart-gauge__needle {
+/* Gauge chart styles */
+.c-chart-gauge__needle-base,
+.c-chart-gauge__needle {
   fill: #555555;
 }
 
@@ -22,7 +27,88 @@ body {
 .c-chart-gauge__gradient-stop4 {
   stop-color: red;
 }
-.c-chart-gauge {
-  background: none; /* Elimina cualquier fondo */
-  border: none; /* Asegúrate de que no haya bordes */
+
+
+/* Tick marks (indicadores del gauge) */
+.gauge-tick {
+  stroke: #000;
+  stroke-width: 2px;
 }
+
+/* Text styles */
+.gauge-title {
+  font-size: 18px;
+  font-weight: bold;
+  fill: #333;
+  text-anchor: middle;
+}
+
+.gauge-value {
+  font-size: 24px;
+  font-weight: bold;
+  fill: #555;
+  text-anchor: middle;
+}
+
+.gauge-label {
+  font-size: 14px;
+  fill: #555;
+  text-anchor: middle;
+}
+
+/* Card container styles */
+.card {
+  width: 220px; /* Ajusta el tamaño para acomodar el gauge */
+  height: 270px; /* Incrementa ligeramente para incluir el texto */
+  border-radius: 30px;
+  background: #f0f0f0; /* Fondo claro */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 26px -18px inset;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  position: relative;
+}
+
+/* Title inside the card */
+.card h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+  text-align: center;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .card {
+    width: 160px;
+    height: 220px;
+  }
+
+  .gauge-title {
+    font-size: 16px;
+  }
+
+  .gauge-value {
+    font-size: 20px;
+  }
+
+  .gauge-label {
+    font-size: 12px;
+  }
+}
+
+
+
+/* Etiqueta dinámica debajo del gauge */
+.gauge-value {
+  font-size: 18px;
+  font-weight: bold;
+  fill: #333;
+  text-anchor: middle;
+  margin-top: 10px;
+}
+

@@ -17,3 +17,67 @@ body {
     padding: 2rem;
   }
   
+
+/* Contenedor para alinear los GaugeChart horizontalmente */
+.gauge-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  gap: 150px; /* Espaciado entre gráficos */
+  margin: 2px 0; /* Espaciado superior e inferior */
+  flex-wrap: wrap; /* Permite que los gráficos pasen a la siguiente fila si no caben */
+  border: 2px solid #4CAF50; /* Borde verde para delimitar */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 10px; /* Espaciado interno */
+  max-width: 100%; /* Asegura que el contenedor no crezca más allá del ancho disponible */
+  overflow: hidden; /* Oculta cualquier contenido que sobresalga */
+  background-color: #ffffff; /* Fondo blanco */
+  box-sizing: border-box; /* Incluye el borde y el padding en el ancho total */
+}
+
+/* GaugeChart (SVG) */
+.c-chart-gauge {
+  width: 100%; /* El gráfico ocupa el 100% del espacio disponible */
+  max-width: 200px; /* Tamaño máximo del gráfico */
+  height: auto; /* Mantiene la proporción del gráfico */
+  margin: 0 auto; /* Centra cada GaugeChart dentro de su propio espacio */
+  box-sizing: border-box;
+}
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 480px) {
+  .gauge-container {
+    flex-direction: column; /* Cambia la disposición de horizontal a vertical */
+    gap: 15px; /* Reduce el espaciado entre los gráficos */
+    align-items: center; /* Asegura que los gráficos estén centrados verticalmente */
+  }
+
+  .c-chart-gauge {
+    width: 90%; /* El gráfico ocupa el 90% del ancho disponible */
+    max-width: 300px; /* Limita el tamaño máximo del gráfico */
+  }
+}
+
+/* Estilos para las etiquetas de texto */
+.gauge-value {
+  font-size: 16px;
+  font-weight: bold;
+  text-anchor: middle;
+  fill: #333; /* Color del texto */
+  margin-top: -20px; /* Ajusta la posición del valor */
+  position: absolute;
+  top: 60%; /* Coloca el texto dentro del gráfico */
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centra el texto horizontalmente */
+}
+
+.gauge-label {
+  font-size: 14px;
+  font-weight: bold;
+  text-anchor: middle;
+  fill: #666;
+  margin-top: 10px; /* Ajusta la posición */
+  position: absolute;
+  top: 80%; /* Coloca la etiqueta debajo del valor */
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

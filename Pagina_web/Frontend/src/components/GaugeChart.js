@@ -1,11 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
-import "../styles/GaugeChart.css"; // Estilos específicos para este botón
-
-// Utilidades para conversiones
-const percentToDegree = (p) => p * 360;
-const degreeToRadian = (d) => (d * Math.PI) / 180;
-const percentToRadian = (p) => degreeToRadian(percentToDegree(p));
+import "../styles/GaugeChart.css"; // Estilos específicos para este componente
 
 // Clase para la Aguja
 class Needle {
@@ -20,9 +15,7 @@ class Needle {
   }
 
   render() {
-    // Asegúrate de limpiar cualquier aguja previa
     this.group.selectAll("*").remove();
-
     this.group.attr("transform", `translate(${this.x},${this.y})`);
     this.group
       .append("circle")
@@ -30,7 +23,6 @@ class Needle {
       .attr("cx", 0)
       .attr("cy", 0)
       .attr("r", this.radius);
-
     this.group
       .append("path")
       .attr("class", "c-chart-gauge__needle")
@@ -40,7 +32,7 @@ class Needle {
   animateTo(p) {
     this.group
       .transition()
-      .duration(3000)
+      .duration(1000)
       .ease(d3.easeElastic)
       .select("path")
       .tween("progress", () => {
@@ -55,7 +47,7 @@ class Needle {
   }
 
   _getPath(p) {
-    const thetaRad = percentToRadian(p / 2),
+    const thetaRad = (-Math.PI / 2) + (Math.PI * p),
       centerX = 0,
       centerY = 0,
       topX = centerX - this.len * Math.cos(thetaRad),
@@ -64,18 +56,20 @@ class Needle {
       leftY = centerY - this.radius * Math.sin(thetaRad - Math.PI / 2),
       rightX = centerX - this.radius * Math.cos(thetaRad + Math.PI / 2),
       rightY = centerY - this.radius * Math.sin(thetaRad + Math.PI / 2);
-
     return `M ${leftX} ${leftY} L ${topX} ${topY} L ${rightX} ${rightY}`;
   }
 }
 
 // Clase para el Gráfico Gauge
+
 class GaugeChart {
   constructor(props) {
     this.svg = props.svg;
     this.group = this.svg.append("g");
     this.outerRadius = props.outerRadius;
     this.innerRadius = props.innerRadius;
+    this.range = props.range;
+    this.label = props.label; // Recibimos la etiqueta dinámica
 
     this.needle = new Needle({
       svg: this.svg,
@@ -84,6 +78,8 @@ class GaugeChart {
       x: this.outerRadius,
       y: this.outerRadius,
     });
+
+    this.textGroup = this.svg.append("g").attr("class", "gauge-text-group");
   }
 
   render() {
@@ -125,16 +121,54 @@ class GaugeChart {
         `translate(${this.outerRadius},${this.outerRadius})`
       );
 
+    // Texto inicial
+    this.renderText(this.range, 0);
     this.needle.render();
   }
 
-  animateTo(p) {
-    this.needle.animateTo(p);
+  renderText(range, value) {
+    const centerX = this.outerRadius;
+    const centerY = this.outerRadius;
+  
+    // Rango del título (primera línea)
+    this.textGroup
+      .append("text")
+      .attr("class", "gauge-title")
+      .attr("x", centerX)
+      .attr("y", centerY - 40)
+      .attr("text-anchor", "middle")
+    //  .text(`Rango: ${range[0]} - ${range[1]}`);
+  
+    // Etiqueta (segunda línea)
+    this.textGroup
+      .append("text")
+      .attr("class", "gauge-label")
+      .attr("x", centerX)
+      .attr("y", centerY + 30) // Posicionamos justo debajo de la línea del rango
+      .attr("text-anchor", "middle")
+     // .text(this.label);
+  
+    // Valor dinámico (tercera línea)
+    this.valueText = this.textGroup
+      .append("text")
+      .attr("class", "gauge-value")
+      .attr("x", centerX)
+      .attr("y", centerY + 60)
+      .attr("text-anchor", "middle")
+     // .text(`${value.toFixed(2)} ${this.label}`);
   }
-}
 
+  updateValue(value) {
+    const normalizedValue =
+      (value - this.range[0]) / (this.range[1] - this.range[0]);
+    this.needle.animateTo(normalizedValue); // Mover la aguja
+  //  this.valueText.text(`${value.toFixed(2)} ${"VAC"}`); // Actualizar el texto del valor dinámico
+  }
+  
+  
+}
 // Componente React
-const Gauge = () => {
+const Gauge = ({ range, value, label }) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -145,20 +179,17 @@ const Gauge = () => {
       svg,
       outerRadius: 160,
       innerRadius: 120,
+      range,
+      label, // Pasamos la etiqueta aquí
     });
 
     gaugeChart.render();
-    gaugeChart.animateTo(Math.random());
-
-    const interval = setInterval(() => {
-      gaugeChart.animateTo(Math.random());
-    }, 5000);
+    gaugeChart.updateValue(value);
 
     return () => {
-      clearInterval(interval);
       svg.selectAll("*").remove(); // Limpia el SVG al desmontar
     };
-  }, []);
+  }, [range, value, label]);
 
   return <svg ref={ref} className="c-chart-gauge" style={{ background: "none" }} />;
 };

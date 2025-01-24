@@ -1,54 +1,137 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import Header from './components/Header';
-import Keymap from './components/Keymap';
+import React, { useState, useEffect } from "react";
+import moment from "moment-timezone";
+import "./App.css";
+import Header from "./components/Header";
+import Keymap from "./components/Keymap";
 import Heatmap from "./components/Heatmap";
-import HistogramaConsumo from './components/Histograma';
-import GaugeChart from './components/GaugeChart';
+import HistogramaConsumo from "./components/Histograma";
+import GaugeChart from "./components/GaugeChart";
 
 const App = () => {
-  const [value, setValue] = useState(120);
+  const [data, setData] = useState(null); // Estado para almacenar los datos del backend
+  const [loading, setLoading] = useState(true); // Estado para manejar la carga
+  const [error, setError] = useState(false); // Estado para manejar errores
+
+  const timezone = "America/Mexico_City"; // Zona horaria para Michoacán
 
   useEffect(() => {
-    //const interval = setInterval(() => {
-    //  setValue(Math.random() * 240); // Simular datos en tiempo real
-    //}, 1000);
-   // return () => clearInterval(interval);
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://zftcgbnpl0.execute-api.us-east-1.amazonaws.com/HMI/dashboard/gauge_chart/va",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const result = await response.json();
+        const payload = JSON.parse(result.body);
 
-  const data = [
-    { time: "2025-01-06T22:20:32", phase: "AN-BN", difference: 10 },
-    { time: "2025-01-06T22:20:32", phase: "AN-CN", difference: 15 },
-    { time: "2025-01-06T22:20:32", phase: "BN-CN", difference: 5 },
-    { time: "2025-01-06T22:20:32", phase: "AB-BC", difference: 20 },
-    { time: "2025-01-06T22:20:32", phase: "AC-BC", difference: 25 },
-    { time: "2025-01-06T22:30:32", phase: "AN-BN", difference: 8 },
-    { time: "2025-01-06T22:30:32", phase: "AN-CN", difference: 12 },
-    { time: "2025-01-06T22:30:32", phase: "BN-CN", difference: 7 },
-    { time: "2025-01-06T22:30:32", phase: "AB-BC", difference: 18 },
-    { time: "2025-01-06T22:30:32", phase: "AC-BC", difference: 22 },
-  ];
+        if (JSON.stringify(payload) !== JSON.stringify(data)) {
+          setData(payload);
+        }
 
-  const data1 = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
+        setLoading(false);
+        setError(false);
+      } catch (err) {
+        console.error("Error al obtener los datos del backend:", err);
+        setLoading(false);
+        setError(true);
+      }
+    };
+
+    fetchData();
+    const interval = setInterval(fetchData, 3600); // Actualizar cada segundo
+    return () => clearInterval(interval);
+  }, [data]);
+
+  if (loading) {
+    return <div>Cargando datos...</div>;
+  }
+
+  if (error || !data) {
+    return <div>Error al cargar los datos.</div>;
+  }
+
+  const localTime = moment.utc(data.fecha_hora).tz(timezone).format("YYYY-MM-DD HH:mm:ss");
 
   return (
     <div className="App">
       <Header />
       <main>
-
-
-      <div>
-          <GaugeChart/>
+        {/* Timestamp */}
+        <div className="timestamp">
+          <p>Última actualización: {localTime}</p>
         </div>
+
+        <div className="gauge-container">
+  <div className="c-chart-gauge">
+    <GaugeChart range={[0, 150]} value={data.va} label="Voltaje Fase A" />
+    <div className="gauge-value">{data.va.toFixed(2)} VAC</div>
+    <div className="gauge-label">Voltaje Fase A</div>
+  </div>
+
+  <div className="c-chart-gauge">
+    <GaugeChart range={[0, 150]} value={data.vb} label="Voltaje Fase B" />
+    <div className="gauge-value">{data.vb.toFixed(2)} VAC</div>
+    <div className="gauge-label">Voltaje Fase B</div>
+  </div>
+
+  <div className="c-chart-gauge">
+    <GaugeChart range={[0, 150]} value={data.vc} label="Voltaje Fase C" />
+    <div className="gauge-value">{data.vc.toFixed(2)} VAC</div>
+    <div className="gauge-label">Voltaje Fase C</div>
+  </div>
+
+  <div className="c-chart-gauge">
+    <GaugeChart range={[0, 150]} value={data.va} label="Voltaje Fase A" />
+    <div className="gauge-value">{data.va.toFixed(2)} VAC</div>
+    <div className="gauge-label">Voltaje Fase A</div>
+  </div>
+
+  <div className="c-chart-gauge">
+    <GaugeChart range={[0, 150]} value={data.vb} label="Voltaje Fase B" />
+    <div className="gauge-value">{data.vb.toFixed(2)} VAC</div>
+    <div className="gauge-label">Voltaje Fase B</div>
+  </div>
+
+  <div className="c-chart-gauge">
+    <GaugeChart range={[0, 150]} value={data.vc} label="Voltaje Fase C" />
+    <div className="gauge-value">{data.vc.toFixed(2)} VAC</div>
+    <div className="gauge-label">Voltaje Fase C</div>
+  </div>
+</div>
+
+
+        {/* Keymap */}
         <div>
           <Keymap />
         </div>
+
+        {/* Heatmap */}
         <div>
-          <Heatmap data={data} />
+          <Heatmap
+            data={[
+              { time: "2025-01-06T22:20:32", phase: "AN-BN", difference: 10 },
+              { time: "2025-01-06T22:20:32", phase: "AN-CN", difference: 15 },
+              { time: "2025-01-06T22:20:32", phase: "BN-CN", difference: 5 },
+              { time: "2025-01-06T22:20:32", phase: "AB-BC", difference: 20 },
+              { time: "2025-01-06T22:20:32", phase: "AC-BC", difference: 25 },
+              { time: "2025-01-06T22:30:32", phase: "AN-BN", difference: 8 },
+              { time: "2025-01-06T22:30:32", phase: "AN-CN", difference: 12 },
+              { time: "2025-01-06T22:30:32", phase: "BN-CN", difference: 7 },
+              { time: "2025-01-06T22:30:32", phase: "AB-BC", difference: 18 },
+              { time: "2025-01-06T22:30:32", phase: "AC-BC", difference: 22 },
+            ]}
+          />
         </div>
+
+        {/* Histograma */}
         <div>
           <h1>Histograma del Consumo Diario</h1>
-          <HistogramaConsumo data={data1} />
+          <HistogramaConsumo data={[50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150]} />
         </div>
       </main>
     </div>
