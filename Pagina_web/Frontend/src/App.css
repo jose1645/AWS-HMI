@@ -63,7 +63,7 @@ body {
   font-weight: bold;
   text-anchor: middle;
   fill: #333; /* Color del texto */
-  margin-top: -20px; /* Ajusta la posición del valor */
+  margin-top: 50px; /* Ajusta la posición del valor */
   position: absolute;
   top: 60%; /* Coloca el texto dentro del gráfico */
   left: 50%;

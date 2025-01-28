@@ -69,38 +69,56 @@ const App = () => {
         <div className="gauge-container">
   <div className="c-chart-gauge">
     <GaugeChart range={[0, 150]} value={data.va} label="Voltaje Fase A" />
-    <div className="gauge-value">{data.va.toFixed(2)} VAC</div>
-    <div className="gauge-label">Voltaje Fase A</div>
+    <label className="label">{data.va.toFixed(2)} VAC</label>
+    <br />
+
+    <label className="label">"VA"</label>
+
   </div>
 
   <div className="c-chart-gauge">
     <GaugeChart range={[0, 150]} value={data.vb} label="Voltaje Fase B" />
-    <div className="gauge-value">{data.vb.toFixed(2)} VAC</div>
-    <div className="gauge-label">Voltaje Fase B</div>
+    <label className="label">{data.vb.toFixed(2)} VAC</label>
+    <br />
+
+    <label className="label">"VB"</label>
+
   </div>
 
   <div className="c-chart-gauge">
     <GaugeChart range={[0, 150]} value={data.vc} label="Voltaje Fase C" />
-    <div className="gauge-value">{data.vc.toFixed(2)} VAC</div>
-    <div className="gauge-label">Voltaje Fase C</div>
+    <label className="label">{data.vc.toFixed(2)} VAC</label>
+    <br />
+
+    <label className="label">"VC"</label>
+
   </div>
 
   <div className="c-chart-gauge">
-    <GaugeChart range={[0, 150]} value={data.va} label="Voltaje Fase A" />
-    <div className="gauge-value">{data.va.toFixed(2)} VAC</div>
-    <div className="gauge-label">Voltaje Fase A</div>
+    <GaugeChart range={[0, 220]} value={data.vab} label="Voltaje Fase A" />
+    <label className="label">{data.vab.toFixed(2)} VAC</label>
+    <br />
+
+    <label className="label">"VAB"</label>
+
   </div>
 
   <div className="c-chart-gauge">
-    <GaugeChart range={[0, 150]} value={data.vb} label="Voltaje Fase B" />
-    <div className="gauge-value">{data.vb.toFixed(2)} VAC</div>
-    <div className="gauge-label">Voltaje Fase B</div>
+    <GaugeChart range={[0, 220]} value={data.vbc} label="Voltaje Fase B" />
+    <label className="label">{data.vbc.toFixed(2)} VAC</label>
+    <br />
+
+    <label className="label">"VBC"</label>
+
   </div>
 
   <div className="c-chart-gauge">
-    <GaugeChart range={[0, 150]} value={data.vc} label="Voltaje Fase C" />
-    <div className="gauge-value">{data.vc.toFixed(2)} VAC</div>
-    <div className="gauge-label">Voltaje Fase C</div>
+    <GaugeChart range={[0, 220]} value={data.vac} label="Voltaje Fase C" />
+    <label className="label">{data.vac.toFixed(2)} VAC</label>
+    <br />
+
+    <label className="label">"VA"</label>
+
   </div>
 </div>
 
