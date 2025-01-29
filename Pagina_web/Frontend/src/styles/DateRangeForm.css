@@ -1,0 +1,73 @@
+/* Estilos generales para el formulario */
+form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Título del formulario */
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo para los campos de entrada */
+  input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  /* Estilo para el botón de envío */
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Cambio de color en el botón al pasar el ratón */
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Estilo para los mensajes de error */
+  p {
+    color: #e74c3c;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  /* Espaciado entre los campos de entrada */
+  div {
+    margin-bottom: 15px;
+  }
+  
+  /* Estilos para el formulario en pantallas pequeñas */
+  @media (max-width: 600px) {
+    form {
+      padding: 15px;
+    }
+  
+    input[type="date"], button {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
+  
