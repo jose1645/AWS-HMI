@@ -25,7 +25,7 @@ const App = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://zftcgbnpl0.execute-api.us-east-1.amazonaws.com/HMI/dashboard/gauge_chart/va",
+          "https://zftcgbnpl0.execute-api.us-east-1.amazonaws.com/HMI/dashboard/consumo_electrico",
           {
             method: "GET",
             headers: {
