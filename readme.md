@@ -1,15 +1,12 @@
 # Proyecto: INTEGRACION HMI DOP100WS-AWS
 ![Logo del Proyecto](./logotipo.png)
 
-Este repositorio contiene el codigo necesario para realizar la adquisicion de datos de un power meter instalado en planta y desplegar sus datos en una instancia EC2 de AWS.
+Este repositorio contiene el codigo necesario para hacer la integracion de los productos delta con la nube de aws.
 ## Características
-- Conexión a servidores OPC UA.
-- Exploración de nodos y estructura jerárquica.
+- Utilizaremos distintos servicios de AWS Tales como: s3, EC2,Dynamo DB,RDS, Entre otros.
+- Conexion a AWS a traves de protocolos de comunicacion que pueden ser industriales.
 - Lectura de valores de nodos específicos.
 - Compatible con múltiples entornos industriales.
-- Script de ingesta de datos periodica.
-- despliegue en EC2 de AWS.
-- Codigo de dashboard desplegado en AWS
 
 ## Requisitos
 ### Software
